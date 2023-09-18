@@ -28,7 +28,7 @@ fastify.get("/test", async (request, reply) => {
   reply.send(`Result ${result}`);
 });
 
-fastify.listen({ port: 443 }, (error, address) => {
+fastify.listen({ port: 443, host: "0.0.0.0" }, (error, address) => {
   if (error) {
     fastify.log.error(error);
     process.exit(1);
