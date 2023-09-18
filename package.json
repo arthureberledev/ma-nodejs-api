@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "tsx src/index.ts",
     "build": "tsc -p tsconfig.json",
-    "start": "node index.js"
+    "start": "node src/index.js"
   },
   "dependencies": {
     "fastify": "^4.23.2"
