@@ -1,13 +1,6 @@
 import Fastify from "fastify";
-import fs from "fs";
 
-const fastify = Fastify({
-  logger: true,
-  https: {
-    key: fs.readFileSync("key.pem"),
-    cert: fs.readFileSync("cert.pem"),
-  },
-});
+const fastify = Fastify();
 
 function doWork(permutations: number): number {
   let count = 0;
@@ -28,9 +21,9 @@ fastify.get("/test", async (request, reply) => {
   reply.send(`Result ${result}`);
 });
 
-fastify.listen({ port: 443, host: "0.0.0.0" }, (error, address) => {
+fastify.listen({ port: 8080, host: "0.0.0.0" }, (error, address) => {
   if (error) {
-    fastify.log.error(error);
+    console.error(error);
     process.exit(1);
   }
   console.log(`Started server at ${address}`);
