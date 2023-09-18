@@ -22,4 +22,4 @@ app.get("/test", (ctx) => {
   return ctx.text(`Result ${result}`);
 });
 
-serve(app);
+serve({ fetch: app.fetch, port: 8080 });
