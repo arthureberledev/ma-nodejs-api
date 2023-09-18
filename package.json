@@ -1,12 +1,16 @@
 {
+  "name": "fastify",
+  "version": "1.0.0",
+  "description": "",
   "scripts": {
     "start": "tsx src/index.ts"
   },
   "dependencies": {
-    "@hono/node-server": "^1.1.0",
-    "hono": "^3.6.0"
+    "fastify": "^4.23.2"
   },
   "devDependencies": {
-    "tsx": "^3.12.2"
+    "@types/node": "^20.6.2",
+    "tsx": "^3.12.10",
+    "typescript": "^5.2.2"
   }
 }

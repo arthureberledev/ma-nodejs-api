@@ -1,5 +1,13 @@
-import { serve } from "@hono/node-server";
-import { Hono } from "hono";
+import Fastify from "fastify";
+import fs from "fs";
+
+const fastify = Fastify({
+  logger: true,
+  https: {
+    key: fs.readFileSync("key.pem"),
+    cert: fs.readFileSync("cert.pem"),
+  },
+});
 
 function doWork(permutations: number): number {
   let count = 0;
@@ -15,11 +23,15 @@ function doWork(permutations: number): number {
   return count;
 }
 
-const app = new Hono();
-
-app.get("/test", (ctx) => {
+fastify.get("/test", async (request, reply) => {
   const result = doWork(10);
-  return ctx.text(`Result ${result}`);
+  reply.send(`Result ${result}`);
 });
 
-serve({ fetch: app.fetch, port: 8080 });
+fastify.listen({ port: 443 }, (error, address) => {
+  if (error) {
+    fastify.log.error(error);
+    process.exit(1);
+  }
+  console.log(`Started server at ${address}`);
+});
